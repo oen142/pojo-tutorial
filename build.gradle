@@ -6,15 +6,37 @@ plugins {
 
 group = 'com.wani'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = '1.8'
 
 repositories {
     mavenCentral()
 }
 
+ext {
+    set("queryDslVersion", "4.4.0")
+    set('lombokVersion', "1.18.16")
+}
+
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+
+// https://mvnrepository.com/artifact/org.glassfish.main.appclient/gf-client
+    implementation group: 'org.glassfish.main.appclient', name: 'gf-client', version: '5.1.0'
+// https://mvnrepository.com/artifact/org.glassfish.mq/imqjmsra
+    implementation group: 'org.glassfish.mq', name: 'imqjmsra', version: '5.1'
+
+
+
+    implementation 'org.springframework:spiring-context'
+    implementation 'org.springframework:spiring-jms'
+
+    testImplementation 'org.springframework:spring-test'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+
 }
 
 test {
